@@ -140,3 +140,31 @@ input, .currency-box {
 .currency-box select:focus {
     outline: none;
 }
+.currency-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.flag-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.currency-box select {
+    border: none;
+    background: transparent;
+    margin-bottom: 0 !important;
+    width: 100%;
+    color: #333;
+    font-weight: bold;
+}
+
+input {
+    color: #000;
+}
