@@ -65,3 +65,23 @@ button:hover {
 input:focus, select:focus {
     outline: 2px solid #e62e00;
 }
+.currency-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.flag-icon {
+  width: 35px;
+  height: auto;
+}
+
+select {
+  border: none;
+  margin-bottom: 0 !important; /* Overriding your previous margin */
+  color: #333;
+}
