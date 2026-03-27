@@ -41,7 +41,6 @@ function convert() {
     .then((val) => val.json())
     .then((val) => {
       // val.rates[to] gets the specific conversion result
-      // Change this line in your convert function:
       output_currency.value = Object.values(val.rates)[0].toFixed(5);
     })
     .catch((err) => {
