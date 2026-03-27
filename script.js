@@ -2,7 +2,7 @@ const select = document.querySelectorAll(".currency");
 const input_currency = document.getElementById('input_currency');
 const output_currency = document.getElementById('output_currency');
 
-// Map currency codes to country codes for flags
+// 1. MAPPING: Connects Currency Code -> Country Code (for FlagsAPI)
 const country_list = {
     "AUD": "AU", "BRL": "BR", "CAD": "CA", "CHF": "CH", "CNY": "CN", 
     "CZK": "CZ", "DKK": "DK", "EUR": "EU", "GBP": "GB", "HKD": "HK", 
@@ -12,34 +12,41 @@ const country_list = {
     "SGD": "SG", "THB": "TH", "TRY": "TR", "USD": "US", "ZAR": "ZA"
 };
 
-// Populate dropdowns
+// 2. Load currencies into the dropdowns
 fetch(`https://api.frankfurter.app/currencies`)
   .then((res) => res.json())
   .then((data) => {
     const entries = Object.entries(data);
-    select.forEach(s => s.innerHTML = ""); // Clear "Select" option
-    
+    select.forEach(s => s.innerHTML = ""); // Clear existing options
+
     entries.forEach(([code]) => {
-      // We only add currencies that we have flags for in our list
+      // Only add currencies we have flags for
       if(country_list[code]) {
           select[0].innerHTML += `<option value="${code}">${code}</option>`;
           select[1].innerHTML += `<option value="${code}">${code}</option>`;
       }
     });
 
-    // Default values
+    // Set Defaults: USD for input, INR for output
     select[0].value = "USD";
     select[1].value = "INR";
-    updateFlag(0);
+    
+    // Initial flag load
+    updateFlag(0); 
     updateFlag(1);
   });
 
+// 3. Update Flag function
 function updateFlag(index) {
-    const code = select[index].value;
-    const country = country_list[code];
-    document.getElementById(`flag${index + 1}`).src = `https://flagsapi.com/${country}/flat/64.png`;
+    const currencyCode = select[index].value;
+    const countryCode = country_list[currencyCode];
+    
+    // Selects flag1 for the first dropdown, flag2 for the second
+    const flagImage = document.getElementById(`flag${index + 1}`);
+    flagImage.src = `https://flagsapi.com/${countryCode}/flat/64.png`;
 }
 
+// 4. Conversion Logic
 function convert() {
     const val = input_currency.value;
     const from = select[0].value;
@@ -58,6 +65,6 @@ function convert() {
             .then(data => {
                 output_currency.value = data.rates[to].toFixed(2);
             })
-            .catch(err => alert("Error fetching rates."));
+            .catch(() => alert("Error fetching rates."));
     }
 }
