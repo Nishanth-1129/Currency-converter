@@ -42,32 +42,36 @@ function updateFlag(index) {
 }
 
 function convert() {
-    const amount = document.getElementById('input_currency').value;
-    const fromCurrency = select[0].value;
-    const toCurrency = select[1].value;
-    const outputField = document.getElementById('output_currency');
+    const input_currency_val = input_currency.value;
+    const from = select[0].value;
+    const to = select[1].value;
 
-    if (amount === "" || amount <= 0) {
+    // 1. Basic validation
+    if (input_currency_val === "" || input_currency_val <= 0) {
         alert("Please enter a valid amount");
         return;
     }
 
-    // If same currency, just show the same value
-    if (fromCurrency === toCurrency) {
-        outputField.value = amount;
+    // 2. Prevent API call if currencies are the same
+    if (from === to) {
+        output_currency.value = input_currency_val;
         return;
     }
 
     const host = 'api.frankfurter.app';
-    fetch(`https://${host}/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
-        .then((resp) => resp.json())
-        .then((data) => {
-            // This pulls the converted value from the rates object
-            const convertedAmount = data.rates[toCurrency];
-            outputField.value = convertedAmount.toFixed(2);
+    fetch(`https://${host}/latest?amount=${input_currency_val}&from=${from}&to=${to}`)
+        .then((val) => val.json())
+        .then((val) => {
+            // FIX: Instead of Object.values, we call the specific 'to' currency key
+            // This ensures if you want INR, you get the INR rate specifically.
+            if (val.rates && val.rates[to]) {
+                output_currency.value = val.rates[to].toFixed(2);
+            } else {
+                alert("Rate not found");
+            }
         })
         .catch((err) => {
-            console.error("API Error:", err);
-            alert("Error fetching conversion rate.");
+            console.error("Fetch error:", err);
+            alert("Connection error. Please try again.");
         });
 }
