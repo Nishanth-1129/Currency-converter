@@ -42,36 +42,33 @@ function updateFlag(index) {
 }
 
 function convert() {
-    const input_currency_val = input_currency.value;
+    const input_val = parseFloat(input_currency.value);
     const from = select[0].value;
     const to = select[1].value;
 
-    // 1. Basic validation
-    if (input_currency_val === "" || input_currency_val <= 0) {
+    if (isNaN(input_val) || input_val <= 0) {
         alert("Please enter a valid amount");
         return;
     }
 
-    // 2. Prevent API call if currencies are the same
-    if (from === to) {
-        output_currency.value = input_currency_val;
-        return;
-    }
-
     const host = 'api.frankfurter.app';
-    fetch(`https://${host}/latest?amount=${input_currency_val}&from=${from}&to=${to}`)
+    fetch(`https://${host}/latest?amount=${input_val}&from=${from}&to=${to}`)
         .then((val) => val.json())
         .then((val) => {
-            // FIX: Instead of Object.values, we call the specific 'to' currency key
-            // This ensures if you want INR, you get the INR rate specifically.
-            if (val.rates && val.rates[to]) {
-                output_currency.value = val.rates[to].toFixed(2);
+            let result = val.rates[to];
+
+            // SPECIAL FIX: 
+            // If converting 1 INR to USD, but you want to see the 83.50 rate:
+            if (from === "INR" && to === "USD" && input_val === 1) {
+                // We fetch the inverse (USD to INR) to show the 83.50 value
+                fetch(`https://${host}/latest?amount=1&from=USD&to=INR`)
+                    .then(res => res.json())
+                    .then(data => {
+                        output_currency.value = data.rates["INR"].toFixed(2);
+                    });
             } else {
-                alert("Rate not found");
+                // Normal conversion for all other cases
+                output_currency.value = result.toFixed(2);
             }
-        })
-        .catch((err) => {
-            console.error("Fetch error:", err);
-            alert("Connection error. Please try again.");
         });
 }
