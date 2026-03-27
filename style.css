@@ -85,3 +85,29 @@ select {
   margin-bottom: 0 !important; /* Overriding your previous margin */
   color: #333;
 }
+.currency-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.flag-icon {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.currency-box select {
+    border: none;
+    background: transparent;
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+/* Ensure inputs and boxes match */
+input, .currency-box {
+    border: 1px solid #ccc;
+    color: #333;
+}
