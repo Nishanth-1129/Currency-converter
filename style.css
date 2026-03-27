@@ -168,3 +168,18 @@ input, .currency-box {
 input {
     color: #000;
 }
+.header-img {
+    text-align: center;
+    margin-bottom: -20px; /* Pulls the image closer to the title */
+}
+
+.header-img img {
+    width: 120px; /* Adjust size as needed */
+    height: auto;
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3)); /* Adds a nice shadow */
+}
+
+h1 {
+    font-size: 45px; /* Slightly smaller to fit the image better */
+    margin-top: 10px;
+}
