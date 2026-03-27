@@ -9,7 +9,10 @@
 <body>
 
 <div class="container">
-    
+    <div class="header-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/2454/2454282.png" alt="Currency Icon">
+    </div>
+
     <h1>Currency Converter</h1>
     
     <div class="row">
@@ -17,7 +20,7 @@
             <div class="currency-box">
                 <img src="https://flagsapi.com/US/flat/64.png" id="flag1" class="flag-icon">
                 <select class="currency" onchange="updateFlag(0)">
-                    </select>
+                    <option value="USD">USD</option> </select>
             </div>
             <input type="number" id="input_currency" value="1">
         </div>
@@ -26,7 +29,7 @@
             <div class="currency-box">
                 <img src="https://flagsapi.com/IN/flat/64.png" id="flag2" class="flag-icon">
                 <select class="currency" onchange="updateFlag(1)">
-                    </select>
+                    <option value="INR">INR</option> </select>
             </div>
             <input type="text" id="output_currency" placeholder="Result" disabled>
         </div>
