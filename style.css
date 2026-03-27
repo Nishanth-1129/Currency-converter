@@ -111,3 +111,32 @@ input, .currency-box {
     border: 1px solid #ccc;
     color: #333;
 }
+.currency-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.flag-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 12px;
+}
+
+.currency-box select {
+    border: none;
+    background: transparent;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #333;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.currency-box select:focus {
+    outline: none;
+}
