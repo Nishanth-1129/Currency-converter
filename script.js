@@ -2,7 +2,7 @@ const select = document.querySelectorAll(".currency");
 const input_currency = document.getElementById('input_currency');
 const output_currency = document.getElementById('output_currency');
 
-// 1. MAPPING: Connects Currency Code -> Country Code (for FlagsAPI)
+// Mapping currency codes to country codes for FlagsAPI
 const country_list = {
     "AUD": "AU", "BRL": "BR", "CAD": "CA", "CHF": "CH", "CNY": "CN", 
     "CZK": "CZ", "DKK": "DK", "EUR": "EU", "GBP": "GB", "HKD": "HK", 
@@ -12,41 +12,35 @@ const country_list = {
     "SGD": "SG", "THB": "TH", "TRY": "TR", "USD": "US", "ZAR": "ZA"
 };
 
-// 2. Load currencies into the dropdowns
+// Fill dropdowns with currencies
 fetch(`https://api.frankfurter.app/currencies`)
   .then((res) => res.json())
   .then((data) => {
     const entries = Object.entries(data);
-    select.forEach(s => s.innerHTML = ""); // Clear existing options
+    select.forEach(s => s.innerHTML = ""); // Clear placeholders
 
     entries.forEach(([code]) => {
-      // Only add currencies we have flags for
+      // Only add if we have a flag for it
       if(country_list[code]) {
           select[0].innerHTML += `<option value="${code}">${code}</option>`;
           select[1].innerHTML += `<option value="${code}">${code}</option>`;
       }
     });
 
-    // Set Defaults: USD for input, INR for output
+    // Default selection
     select[0].value = "USD";
     select[1].value = "INR";
-    
-    // Initial flag load
-    updateFlag(0); 
+    updateFlag(0);
     updateFlag(1);
   });
 
-// 3. Update Flag function
+// Updates the flag image based on selection
 function updateFlag(index) {
     const currencyCode = select[index].value;
     const countryCode = country_list[currencyCode];
-    
-    // Selects flag1 for the first dropdown, flag2 for the second
-    const flagImage = document.getElementById(`flag${index + 1}`);
-    flagImage.src = `https://flagsapi.com/${countryCode}/flat/64.png`;
+    document.getElementById(`flag${index + 1}`).src = `https://flagsapi.com/${countryCode}/flat/64.png`;
 }
 
-// 4. Conversion Logic
 function convert() {
     const val = input_currency.value;
     const from = select[0].value;
@@ -65,6 +59,6 @@ function convert() {
             .then(data => {
                 output_currency.value = data.rates[to].toFixed(2);
             })
-            .catch(() => alert("Error fetching rates."));
+            .catch(() => alert("Could not fetch latest rates."));
     }
 }
