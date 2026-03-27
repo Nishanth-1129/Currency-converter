@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Converter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <div class="container">
     <div class="header-img">
         <img src="https://cdn-icons-png.flaticon.com/512/2454/2454282.png" alt="Currency Icon">
-    </div>
-    <h1>Currency Converter</h1>
-    
     </div>
     <h1>Currency Converter</h1>
     
@@ -22,19 +18,15 @@
         <div class="col">
             <div class="currency-box">
                 <img src="https://flagsapi.com/US/flat/64.png" id="flag1" class="flag-icon">
-                <select class="currency" onchange="updateFlag(0)">
-                    <option value="USD">USD</option>
-                </select>
+                <select class="currency" onchange="updateFlag(0)"></select>
             </div>
-            <input type="number" id="input_currency" placeholder="0.00">
+            <input type="number" id="input_currency" value="1">
         </div>
 
         <div class="col">
             <div class="currency-box">
                 <img src="https://flagsapi.com/IN/flat/64.png" id="flag2" class="flag-icon">
-                <select class="currency" onchange="updateFlag(1)">
-                    <option value="INR">INR</option>
-                </select>
+                <select class="currency" onchange="updateFlag(1)"></select>
             </div>
             <input type="text" id="output_currency" placeholder="Result" disabled>
         </div>
@@ -43,7 +35,6 @@
     <button onclick="convert()">Convert</button>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
