@@ -27,6 +27,25 @@
     <button onClick="convert()">Convert</button>
 </div>
 
+<div class="row">
+  <div class="col">
+    <div class="currency-box">
+      <img src="https://flagsapi.com/US/flat/64.png" id="flag1" class="flag-icon">
+      <select name="currency" class="currency" onchange="updateFlag(0)"> 
+        </select>
+    </div>
+    <input type="text" id="input_currency" placeholder="0.00">
+  </div>
+
+  <div class="col">
+    <div class="currency-box">
+      <img src="https://flagsapi.com/EU/flat/64.png" id="flag2" class="flag-icon">
+      <select name="currency" class="currency" onchange="updateFlag(1)">
+      </select>
+    </div>
+    <input type="text" id="output_currency" disabled>
+  </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
 </body>
