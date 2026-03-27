@@ -16,7 +16,8 @@
             <div class="currency-box">
                 <img src="https://flagsapi.com/US/flat/64.png" id="flag1" class="flag-icon">
                 <select class="currency" onchange="updateFlag(0)">
-                    </select>
+                    <option value="USD">USD</option>
+                </select>
             </div>
             <input type="number" id="input_currency" placeholder="0.00">
         </div>
@@ -25,13 +26,14 @@
             <div class="currency-box">
                 <img src="https://flagsapi.com/IN/flat/64.png" id="flag2" class="flag-icon">
                 <select class="currency" onchange="updateFlag(1)">
-                    </select>
+                    <option value="INR">INR</option>
+                </select>
             </div>
             <input type="text" id="output_currency" placeholder="Result" disabled>
         </div>
     </div>
 
-    <button onClick="convert()">Convert</button>
+    <button onclick="convert()">Convert</button>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
