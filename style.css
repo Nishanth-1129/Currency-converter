@@ -56,4 +56,12 @@ button{
 	border:0;
 	cursor: pointer;
 }
+button:hover {
+    background-color: #ff3300;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
 
+input:focus, select:focus {
+    outline: 2px solid #e62e00;
+}
