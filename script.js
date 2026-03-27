@@ -42,23 +42,32 @@ function updateFlag(index) {
 }
 
 function convert() {
-    const val = input_currency.value;
-    const from = select[0].value;
-    const to = select[1].value;
+    const amount = document.getElementById('input_currency').value;
+    const fromCurrency = select[0].value;
+    const toCurrency = select[1].value;
+    const outputField = document.getElementById('output_currency');
 
-    if (val === "" || val <= 0) {
+    if (amount === "" || amount <= 0) {
         alert("Please enter a valid amount");
         return;
     }
 
-    if (from === to) {
-        output_currency.value = val;
-    } else {
-        fetch(`https://api.frankfurter.app/latest?amount=${val}&from=${from}&to=${to}`)
-            .then(res => res.json())
-            .then(data => {
-                output_currency.value = data.rates[to].toFixed(2);
-            })
-            .catch(() => alert("Could not fetch latest rates."));
+    // If same currency, just show the same value
+    if (fromCurrency === toCurrency) {
+        outputField.value = amount;
+        return;
     }
+
+    const host = 'api.frankfurter.app';
+    fetch(`https://${host}/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+            // This pulls the converted value from the rates object
+            const convertedAmount = data.rates[toCurrency];
+            outputField.value = convertedAmount.toFixed(2);
+        })
+        .catch((err) => {
+            console.error("API Error:", err);
+            alert("Error fetching conversion rate.");
+        });
 }
