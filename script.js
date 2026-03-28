@@ -11,14 +11,12 @@ const country_list = {
     "SGD": "SG", "THB": "TH", "TRY": "TR", "USD": "US", "ZAR": "ZA"
 };
 
+// ... (your country_list mapping stays the same) ...
+
 fetch(`https://api.frankfurter.app/currencies`)
   .then((res) => res.json())
   .then((data) => {
     const entries = Object.entries(data);
-    
-    // Clear the selects but keep our hardcoded defaults
-    const val0 = select[0].value;
-    const val1 = select[1].value;
     select[0].innerHTML = "";
     select[1].innerHTML = "";
 
@@ -29,11 +27,26 @@ fetch(`https://api.frankfurter.app/currencies`)
       }
     });
 
-    // Restore defaults and run initial conversion
-    select[0].value = val0;
-    select[1].value = val1;
-    convert(); 
+    // SET DEFAULTS AFTER LOADING LIST
+    select[0].value = "USD";
+    select[1].value = "INR";
+    
+    // CRITICAL: Call these two lines to show the icons!
+    updateFlag(0);
+    updateFlag(1);
+    convert(); // Also shows the 83.50 result immediately
   });
+
+function updateFlag(index) {
+    const currencyCode = select[index].value;
+    const countryCode = country_list[currencyCode];
+    
+    // This line changes the image URL dynamically
+    const flagImg = document.getElementById(`flag${index + 1}`);
+    if (countryCode) {
+        flagImg.src = `https://flagsapi.com/${countryCode}/flat/64.png`;
+    }
+}
 
 function updateFlag(index) {
     const currencyCode = select[index].value;
