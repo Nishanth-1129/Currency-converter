@@ -39,15 +39,12 @@ fetch(`https://api.frankfurter.app/currencies`)
 
 function updateFlag(index) {
     const currencyCode = select[index].value;
-    const countryCode = country_list[currencyCode];
+    // If the currency isn't in our list, default to "US" so it doesn't stay empty
+    const countryCode = country_list[currencyCode] || "US"; 
     
-    // This line changes the image URL dynamically
     const flagImg = document.getElementById(`flag${index + 1}`);
-    if (countryCode) {
-        flagImg.src = `https://flagsapi.com/${countryCode}/flat/64.png`;
-    }
+    flagImg.src = `https://flagsapi.com/${countryCode}/flat/64.png`;
 }
-
 function updateFlag(index) {
     const currencyCode = select[index].value;
     const countryCode = country_list[currencyCode];
