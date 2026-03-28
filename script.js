@@ -4,42 +4,13 @@ const output_currency = document.getElementById('output_currency');
 
 const country_list = {
 const country_list = {
-    "AED": "AE",
-    "AFN": "AF",
-    "AUD": "AU",
-    "BRL": "BR",
-    "CAD": "CA",
-    "CHF": "CH",
-    "CLP": "CL",
-    "CNY": "CN",
-    "CZK": "CZ",
-    "DKK": "DK",
-    "EUR": "EU", // <--- ENSURE THIS LINE IS HERE
-    "GBP": "GB",
-    "HKD": "HK",
-    "HUF": "HU",
-    "IDR": "ID",
-    "ILS": "IL",
-    "INR": "IN",
-    "JPY": "JP",
-    "KRW": "KR",
-    "MXN": "MX",
-    "MYR": "MY",
-    "NOK": "NO",
-    "NZD": "NZ",
-    "PHP": "PH",
-    "PLN": "PL",
-    "RON": "RO",
-    "RUB": "RU",
-    "SEK": "SE",
-    "SGD": "SG",
-    "THB": "TH",
-    "TRY": "TR",
-    "USD": "US",
-    "ZAR": "ZA"
+   "AUD": "AU", "BRL": "BR", "CAD": "CA", "CHF": "CH", "CNY": "CN", 
+    "CZK": "CZ", "DKK": "DK", "EUR": "EU", "GBP": "GB", "HKD": "HK", 
+    "HUF": "HU", "IDR": "ID", "ILS": "IL", "INR": "IN", "JPY": "JP", 
+    "KRW": "KR", "MXN": "MX", "MYR": "MY", "NOK": "NO", "NZD": "NZ", 
+    "PHP": "PH", "PLN": "PL", "RON": "RO", "RUB": "RU", "SEK": "SE", 
+    "SGD": "SG", "THB": "TH", "TRY": "TR", "USD": "US", "ZAR": "ZA"
 };
-};
-
 // ... (your country_list mapping stays the same) ...
 
 fetch(`https://api.frankfurter.app/currencies`)
