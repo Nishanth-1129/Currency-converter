@@ -96,7 +96,15 @@ function convert() {
         });
 }
 
-// RUN CONVERT ON LOAD
+// Remove or comment out these lines:
 window.onload = () => {
-    convert();
+    convert(); 
 };
+fetch(`https://api.frankfurter.app/currencies`)
+  .then((res) => res.json())
+  .then((data) => {
+    // ... your code to fill dropdowns ...
+    
+    // REMOVE THIS LINE if it exists inside your fetch:
+    // convert(); 
+  });
